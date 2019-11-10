@@ -21,12 +21,6 @@ public class PlatformScript : MonoBehaviour
     }
 
 
-
-
-
-
-    
-
     // Update is called once per frame
     void Update()
     {
@@ -47,40 +41,40 @@ public class PlatformScript : MonoBehaviour
 
     void BreakableDeactivate()
     {
-        Invoke("DeactivateGameObject", 0.3f);
+        Invoke("DeactivateGameObject", 0.35f);
     }
 
     void DeactivateGameObject()
     {
-        // SoundManger.instance.IceBreakSound();
+        SoundManager.instance.IceBreakSound();
         gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D target)
+     void OnTriggerEnter2D(Collider2D target)
     {
-        if(target.tag == "player")
+        if(target.tag == "Player")
         {
             if(is_Spike)
             {
                 target.transform.position = new Vector2(1000f, 1000f);
-                //SoundManager.instance.GameOverSound();
-                //GameManager.instance.RestartGame();
+                SoundManager.instance.GameOverSound();
+                GameManager.instance.RestartGame();
             }
         }
     } // on trigger 
-    private void OnCollisionEnter2D(Collision2D target)
+    void OnCollisionEnter2D(Collision2D target)
     {
-        if (target.gameObject.tag == "Player");
+        if (target.gameObject.tag == "Player")
         {
             if(is_Breakable)
             {
-                //SoundManager.instance.LandSound();
+                SoundManager.instance.LandSound();
                 anim.Play("Break");
             }
 
             if (is_Platform)
             {
-                //SoundManager.instance.LandSound();
+                SoundManager.instance.LandSound();
             }
         }
     } // on collision
